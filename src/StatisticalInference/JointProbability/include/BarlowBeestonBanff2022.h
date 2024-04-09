@@ -192,6 +192,11 @@ namespace JointProbability{
                      << std::endl;
         chisq = 0.;
       }
+      else if( predVal <= 0.0 ){
+        // This is added for cross section fit, where template parameters are allowed to go
+        // negative and sometimes can make bin content negative
+        chisq = 0.;
+      }
       else{
         chisq = std::numeric_limits<double>::infinity();
       }
