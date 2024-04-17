@@ -52,6 +52,7 @@ A certain number of trigger options can be used depending  on what the user need
 | --scan           | Enable parameter scan before and after the fit (can provide nSteps)                      |
 | ---scan-line     | Provide par injector files: start and end point or only end point (start will be prefit) |
 | --toy            | Run a toy fit (optional arg to provide toy index)                                        |
+
 For a complete list of options run command without arguments.
 ### Config options
 

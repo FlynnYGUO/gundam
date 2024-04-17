@@ -8,11 +8,12 @@
 - [gundamConfigCompare](applications/gundamConfigCompare.md)
 - [gundamConfigUnfolder](applications/gundamConfigUnfolder.md)
 - [gundamFitCompare](applications/gundamFitCompare.md)
-- [gundamFitPlot](gundamFitPlot.md)
-- [gundamFitReader](gundamFitReader.md)
-- [gundamInputZipper](gundamInputZipper.md)
-- [gundamPlotExtractor](gundamPlotExtractor.md)
-- [gundamRoot](gundamRoot.md)
+- [gundamFitPlot](applications/gundamFitPlot.md)
+- [gundamFitReader](applications/gundamFitReader.md)
+- [gundamInputZipper](applications/gundamInputZipper.md)
+- [gundamPlotExtractor](applications/gundamPlotExtractor.md)
+- [gundamRoot](applications/gundamRoot.md)
+
 In general if you run the command without any arguments you get an explanation of what it does and what arguments can be used. For example if we take `gundamCalcXsec`:
 ```bash
 [gundamCalcXsec.cxx]: Usage: 
