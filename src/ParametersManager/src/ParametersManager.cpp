@@ -224,12 +224,16 @@ void ParametersManager::throwParametersFromGlobalCovariance(bool quietVerbose_){
       if( _reThrowParSetIfOutOfBounds_ ){
         if      ( not std::isnan(parPtr->getMinValue()) and parPtr->getParameterValue() < parPtr->getMinValue() ){
           rethrow = true;
-          LogAlert << GenericToolbox::ColorCodes::redLightText << "thrown value lower than min bound -> " << GenericToolbox::ColorCodes::resetColor
+          //LogAlert << GenericToolbox::ColorCodes::redLightText << "thrown value lower than min bound -> " << GenericToolbox::ColorCodes::resetColor
+          //         << parPtr->getSummary(true) << std::endl;
+          std::cout << GenericToolbox::ColorCodes::redLightText << "thrown value lower than min bound -> " << GenericToolbox::ColorCodes::resetColor
                    << parPtr->getSummary(true) << std::endl;
         }
         else if( not std::isnan(parPtr->getMaxValue()) and parPtr->getParameterValue() > parPtr->getMaxValue() ){
           rethrow = true;
-          LogAlert << GenericToolbox::ColorCodes::redLightText <<"thrown value higher than max bound -> " << GenericToolbox::ColorCodes::resetColor
+          //LogAlert << GenericToolbox::ColorCodes::redLightText <<"thrown value higher than max bound -> " << GenericToolbox::ColorCodes::resetColor
+                   << parPtr->getSummary(true) << std::endl;
+          std::cout << GenericToolbox::ColorCodes::redLightText <<"thrown value higher than max bound -> " << GenericToolbox::ColorCodes::resetColor
                    << parPtr->getSummary(true) << std::endl;
         }
       }
