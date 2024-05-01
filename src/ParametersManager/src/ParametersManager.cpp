@@ -232,7 +232,7 @@ void ParametersManager::throwParametersFromGlobalCovariance(bool quietVerbose_){
         else if( not std::isnan(parPtr->getMaxValue()) and parPtr->getParameterValue() > parPtr->getMaxValue() ){
           rethrow = true;
           //LogAlert << GenericToolbox::ColorCodes::redLightText <<"thrown value higher than max bound -> " << GenericToolbox::ColorCodes::resetColor
-                   << parPtr->getSummary(true) << std::endl;
+          //         << parPtr->getSummary(true) << std::endl;
           std::cout << GenericToolbox::ColorCodes::redLightText <<"thrown value higher than max bound -> " << GenericToolbox::ColorCodes::resetColor
                    << parPtr->getSummary(true) << std::endl;
         }
