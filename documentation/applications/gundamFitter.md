@@ -40,7 +40,7 @@ A certain number of trigger options can be used depending  on what the user need
 | Option           | Description                                                                              |
 | ---------------- | ---------------------------------------------------------------------------------------- |
 | -d               | Perform the full sequence of initialization, but don't do the actual fit.                |
-| -a               | Use MC dataset to fill the data histograms                                               |
+| -a               | Asimov fit: use MC dataset to fill the data histograms                                   |
 | --pca            | Enable principle component analysis for eigen decomposed parameter sets                  |
 | --skip-hesse     | Don't perform postfit error evaluation                                                   |
 | --skip-simplex   | Don't run SIMPLEX before the actual fit                                                  |
