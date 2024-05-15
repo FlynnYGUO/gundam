@@ -30,6 +30,9 @@ void ParameterSet::readConfigImpl(){
   _isEnabled_ = GenericToolbox::Json::fetchValue<bool>(_config_, "isEnabled");
   LogReturnIf(not _isEnabled_, _name_ << " parameters are disabled.");
 
+  _isFixed_ = GenericToolbox::Json::fetchValue<bool>(_config_, "isFixed");
+  LogReturnIf(_isFixed_, _name_ << " parameters are fixed.");
+
   _nbParameterDefinition_ = GenericToolbox::Json::fetchValue(_config_, "numberOfParameters", _nbParameterDefinition_);
   _nominalStepSize_ = GenericToolbox::Json::fetchValue(_config_, "nominalStepSize", _nominalStepSize_);
 
@@ -669,6 +672,7 @@ void ParameterSet::injectParameterValues(const JsonType& config_){
 
         LogInfo << "Injecting \"" << parPtr->getFullTitle() << "\": " << GenericToolbox::Json::fetchValue<double>(parValueEntry, "value") << std::endl;
         parPtr->setParameterValue( GenericToolbox::Json::fetchValue<double>(parValueEntry, "value") );
+        parPtr->setIsFixed(_isFixed_);
       }
       else if( GenericToolbox::Json::doKeyExist(parValueEntry, "title") ){
         auto parTitle = GenericToolbox::Json::fetchValue<std::string>(parValueEntry, "title");
@@ -683,6 +687,7 @@ void ParameterSet::injectParameterValues(const JsonType& config_){
 
         LogInfo << "Injecting \"" << parPtr->getFullTitle() << "\": " << GenericToolbox::Json::fetchValue<double>(parValueEntry, "value") << std::endl;
         parPtr->setParameterValue( GenericToolbox::Json::fetchValue<double>(parValueEntry, "value") );
+        parPtr->setIsFixed(_isFixed_);
       }
       else if( GenericToolbox::Json::doKeyExist(parValueEntry, "index") ){
         auto parIndex = GenericToolbox::Json::fetchValue<int>(parValueEntry, "index");
@@ -697,6 +702,7 @@ void ParameterSet::injectParameterValues(const JsonType& config_){
 
         LogInfo << "Injecting \"" << parPtr->getFullTitle() << "\": " << GenericToolbox::Json::fetchValue<double>(parValueEntry, "value") << std::endl;
         parPtr->setParameterValue( GenericToolbox::Json::fetchValue<double>(parValueEntry, "value") );
+        parPtr->setIsFixed(_isFixed_);
       }
       else {
         LogThrow("Unsupported: " << parValueEntry);
