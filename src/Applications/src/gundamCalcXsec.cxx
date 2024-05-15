@@ -197,6 +197,13 @@ int main(int argc, char** argv){
     return EXIT_SUCCESS;
   }
 
+  bool enableEventMcThrow{true};
+  bool enableStatThrowInToys{true};
+  bool enableSystParaThrow{true};
+  auto xsecCalcConfig   = GenericToolbox::Json::fetchValue( cHandler.getConfig(), "xsecCalcConfig", JsonType() );
+  enableStatThrowInToys = GenericToolbox::Json::fetchValue( xsecCalcConfig, "enableStatThrowInToys", enableStatThrowInToys);
+  enableEventMcThrow    = GenericToolbox::Json::fetchValue( xsecCalcConfig, "enableEventMcThrow", enableEventMcThrow);
+  enableSystParaThrow = GenericToolbox::Json::fetchValue( xsecCalcConfig, "enableSystParaThrow", enableSystParaThrow);
 
   if( not clParser.isOptionTriggered("usePreFit") and fitterRootFile != nullptr ){
 
@@ -221,6 +228,11 @@ int main(int argc, char** argv){
           if(par_name == "template parameters C" || par_name == "template parameters O"){
             par.setMinValue(-30);
             par.setMaxValue(30);
+          }
+          // Systematic parameters
+          else{
+            // Fix systematic parameters
+            if(!enableSystParaThrow) par.setIsFixed(true);
           }
         }
       }
@@ -517,12 +529,6 @@ int main(int argc, char** argv){
       std::for_each(dataEvList.begin(), dataEvList.end(), []( Event& ev_){ ev_.getWeights().current = 0; });
     }
   }
-
-  bool enableEventMcThrow{true};
-  bool enableStatThrowInToys{true};
-  auto xsecCalcConfig   = GenericToolbox::Json::fetchValue( cHandler.getConfig(), "xsecCalcConfig", JsonType() );
-  enableStatThrowInToys = GenericToolbox::Json::fetchValue( xsecCalcConfig, "enableStatThrowInToys", enableStatThrowInToys);
-  enableEventMcThrow    = GenericToolbox::Json::fetchValue( xsecCalcConfig, "enableEventMcThrow", enableEventMcThrow);
 
   auto writeBinDataFct = std::function<void()>([&]{
     for( auto& xsec : crossSectionDataList ){

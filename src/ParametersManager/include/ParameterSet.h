@@ -44,7 +44,6 @@ public:
 
   // Getters
   [[nodiscard]] bool isEnabled() const{ return _isEnabled_; }
-  [[nodiscard]] bool isFixed() const{ return _isFixed_; }
   [[nodiscard]] bool isEnablePca() const{ return _enablePca_; }
   [[nodiscard]] bool isEnableEigenDecomp() const{ return _enableEigenDecomp_; }
   [[nodiscard]] bool isEnabledThrowToyParameters() const{ return _enabledThrowToyParameters_; }
@@ -122,7 +121,6 @@ private:
   JsonType _parameterDefinitionConfig_{};
   JsonType _dialSetDefinitions_{};
   bool _isEnabled_{};
-  bool _isFixed_{false};
   bool _useMarkGenerator_{false};
   bool _useEigenDecompForThrows_{false};
   bool _maskedForPropagation_{false};
