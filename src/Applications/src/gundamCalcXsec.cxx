@@ -199,10 +199,12 @@ int main(int argc, char** argv){
 
   bool enableEventMcThrow{true};
   bool enableStatThrowInToys{true};
+  bool enableTempParaThrow{true};
   bool enableSystParaThrow{true};
   auto xsecCalcConfig   = GenericToolbox::Json::fetchValue( cHandler.getConfig(), "xsecCalcConfig", JsonType() );
   enableStatThrowInToys = GenericToolbox::Json::fetchValue( xsecCalcConfig, "enableStatThrowInToys", enableStatThrowInToys);
   enableEventMcThrow    = GenericToolbox::Json::fetchValue( xsecCalcConfig, "enableEventMcThrow", enableEventMcThrow);
+  enableTempParaThrow = GenericToolbox::Json::fetchValue( xsecCalcConfig, "enableTempParaThrow", enableTempParaThrow);
   enableSystParaThrow = GenericToolbox::Json::fetchValue( xsecCalcConfig, "enableSystParaThrow", enableSystParaThrow);
 
   if( not clParser.isOptionTriggered("usePreFit") and fitterRootFile != nullptr ){
@@ -228,6 +230,9 @@ int main(int argc, char** argv){
           if(par_name == "template parameters C" || par_name == "template parameters O"){
             par.setMinValue(-30);
             par.setMaxValue(30);
+
+            // Fix template parameters
+            if(!enableTempParaThrow) par.setIsFixed(true);
           }
           // Systematic parameters
           else{
