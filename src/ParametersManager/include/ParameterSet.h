@@ -122,7 +122,7 @@ private:
   JsonType _parameterDefinitionConfig_{};
   JsonType _dialSetDefinitions_{};
   bool _isEnabled_{};
-  bool _isFixed_{};
+  bool _isFixed_{false};
   bool _useMarkGenerator_{false};
   bool _useEigenDecompForThrows_{false};
   bool _maskedForPropagation_{false};
