@@ -30,7 +30,7 @@ void ParameterSet::readConfigImpl(){
   _isEnabled_ = GenericToolbox::Json::fetchValue<bool>(_config_, "isEnabled");
   LogReturnIf(not _isEnabled_, _name_ << " parameters are disabled.");
 
-  _isFixed_ = GenericToolbox::Json::fetchValue<bool>(_config_, "isFixed");
+  _isFixed_ = GenericToolbox::Json::fetchValue<bool>(_config_, "isFixed", false);
   LogReturnIf(_isFixed_, _name_ << " parameters are fixed.");
 
   _nbParameterDefinition_ = GenericToolbox::Json::fetchValue(_config_, "numberOfParameters", _nbParameterDefinition_);
