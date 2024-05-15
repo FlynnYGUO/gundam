@@ -311,6 +311,12 @@ void ParametersManager::injectParameterValues(const JsonType &config_) {
 
     auto* selectedParSet = this->getFitParameterSetPtr(parSetName );
     LogThrowIf( selectedParSet == nullptr, "Could not find parSet: " << parSetName );
+ 
+    // Skip if this parameter set is not enabled
+    if( not selectedParSet->isEnabled() ){
+      LogAlert << "NOT injecting \"" << parSetName << "\" as it is disabled." << std::endl;
+      continue;
+    }    
 
     selectedParSet->injectParameterValues(entryParSet);
   }
