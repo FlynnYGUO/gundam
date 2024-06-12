@@ -421,7 +421,11 @@ int main(int argc, char** argv){
     }
   }
 
-
+  LogInfo << "Writing event samples in TTrees..." << std::endl;
+  dataSetManager.getTreeWriter().writeSamples(
+      GenericToolbox::mkdirTFile(calcXsecDir, "events"),
+      dataSetManager.getPropagator()
+  );
 
   // to be filled up
   struct BinNormaliser{
@@ -770,13 +774,6 @@ int main(int argc, char** argv){
   propagator.getPlotGenerator().generateCanvas(
       propagator.getPlotGenerator().getHistHolderList(0),
       GenericToolbox::mkdirTFile(calcXsecDir, "plots/canvas")
-  );
-
-
-  LogInfo << "Writing event samples in TTrees..." << std::endl;
-  dataSetManager.getTreeWriter().writeSamples(
-      GenericToolbox::mkdirTFile(calcXsecDir, "events"),
-      dataSetManager.getPropagator()
   );
 
 }
