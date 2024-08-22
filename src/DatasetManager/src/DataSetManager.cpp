@@ -161,25 +161,6 @@ void DataSetManager::loadData(){
     }
   }
 
-  // Throw parameter priors in toy
-  if( _propagator_.isThrowToyParametersPrior() ){
-     LogWarning << "Will throw toy parameter priors..." << std::endl;
-
-     // Throw parameter values, but this will not change priors
-     _propagator_.getParametersManager().throwParameters();
-
-     // The priors need to be changed by hand
-     LogWarning << "Parameter values thrown, changing parameter priors..." << std::endl;
-     for( auto& parSet : _propagator_.getParametersManager().getParameterSetsList() ){
-       if( not parSet.isEnabled() ) continue;
-
-       for( auto& par : parSet.getParameterList() ){
-         if( not par.isEnabled() ){ continue; }
-         par.setPriorValue( par.getParameterValue() );
-       }
-     }
-  }
-
   if( not allAsimov ){
     // reload everything
     // Filling the mc containers
@@ -209,6 +190,27 @@ void DataSetManager::loadData(){
     Cache::Manager::Build(_propagator_.getSampleSet(), _propagator_.getEventDialCache());
   }
 #endif
+
+  _propagator_.reweightMcEvents();
+
+  // Throw parameter priors in toy
+  if( _propagator_.isThrowToyParametersPrior() ){
+     LogWarning << "Will throw toy parameter priors..." << std::endl;
+
+     // Throw parameter values, but this will not change priors
+     _propagator_.getParametersManager().throwParameters();
+
+     // The priors need to be changed by hand
+     LogWarning << "Parameter values thrown, changing parameter priors..." << std::endl;
+     for( auto& parSet : _propagator_.getParametersManager().getParameterSetsList() ){
+       if( not parSet.isEnabled() ) continue;
+
+       for( auto& par : parSet.getParameterList() ){
+         if( not par.isEnabled() ){ continue; }
+         par.setPriorValue( par.getParameterValue() );
+       }
+     }
+  }
 
   LogInfo << "Filling up sample bin caches..." << std::endl;
   GundamGlobals::getParallelWorker().runJob([this](int iThread){
