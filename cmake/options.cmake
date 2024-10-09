@@ -14,7 +14,7 @@ option( ENABLE_DEV_MODE "Enable specific dev related printouts." OFF  )
 option( WITH_DOXYGEN "Build documentation with doxygen." OFF )
 option( WITH_GUNDAM_ROOT_APP "Build app gundamRoot." ON )
 option( WITH_CACHE_MANAGER "Enable compiling of the cache manager (required for GPU computing)." ON )
-option( WITH_CUDA_LIB "Enable CUDA language check (Cache::Manager requires a GPU if CUDA is found)." OFF )
+option( WITH_CUDA_LIB "Enable CUDA language check (Cache::Manager requires a GPU if CUDA is found)." ON )
 
 # compile helper
 option( YAMLCPP_DIR "Set custom path to yaml-cpp lib." OFF )
